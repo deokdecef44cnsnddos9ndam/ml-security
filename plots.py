@@ -100,3 +100,54 @@ def plot_progress(loss_history, logits_history, base_class, target_class):
     ax2.set_xlabel('Iteration')
     display.clear_output(wait=True)
     display.display(fig)
+ 
+def evaluate(model, transform, base_img, desired_class, threshold=0.5):
+    """
+    Calculates the number of succesfuls classifcations above the target confidence threshold.
+    
+    Params
+    ------
+    logits : torch.FloatTensor of shape (1000,)
+    desired_class : str
+        Targeted class name
+    threshold : float
+        Confidence value above which defines success
+        
+    Returns
+    -------
+    float
+        percent success
+    """
+   
+    successes = 0
+    failures = 0
+
+    batched_img = base_img.repeat(10, 1, 1, 1)
+    score_history = []
+    
+    for i in range(5):
+        logits = model(transform(batched_img))
+        for l in logits:
+            score = get_score(l, desired_class)
+            if score > threshold:
+                successes += 1
+            else:
+                failures += 1
+                
+            score_history.append(score)
+            score_history.sort(reverse=True)
+            
+            percent_success = round((successes / (successes + failures)) * 100.0, 2)
+        
+            plt.close()
+    
+            plt.title(f"Percent Success {percent_success}%")
+            plt.ylim(0.0, 1.0)
+            plt.ylabel('Confidence')
+            plt.bar(range(len(score_history)), score_history)
+            plt.axhline(0.5, color='red')
+    
+            display.clear_output(wait=True)
+            display.display(plt.gcf())
+            
+    display.clear_output(wait=True)
