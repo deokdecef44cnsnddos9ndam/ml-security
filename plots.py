@@ -2,7 +2,7 @@ import IPython.display as display
 import matplotlib.pyplot as plt
 from mlsec.imagenet_classes import IMAGENET_CLASSES
 
-def get_inference(logits: Logits) -> Sequence[Tuple[str, float]]:
+def get_inference(logits):
     """
     Returns the top five highest confidence classes and their probabilities.
     
@@ -24,7 +24,7 @@ def get_inference(logits: Logits) -> Sequence[Tuple[str, float]]:
         results += [(class_name, v)]
     return results
 
-def get_class_index(class_name: str) -> int:
+def get_class_index(class_name):
     """
     Returns the class index for a given class name.
     
@@ -41,7 +41,7 @@ def get_class_index(class_name: str) -> int:
     ind, _ = next(filter(lambda x: x[1] == class_name, IMAGENET_CLASSES.items()), None)
     return ind
         
-def print_inference(logits: Logits):
+def print_inference(logits):
     """
     Prints the top 5 class and their confidences
     
@@ -53,7 +53,7 @@ def print_inference(logits: Logits):
     for name, prob in results:
         print(f'{name}: {prob}')
         
-def get_score(logits: Logits, class_name: str) -> float:
+def get_score(logits, class_name):
     """
     Returns the probability of a given class
     
