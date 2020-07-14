@@ -1,4 +1,6 @@
 import torch
+import torchvision
+
 import matplotlib.pyplot as plt
 from skimage import io
 import numpy as np
@@ -44,3 +46,8 @@ def show(img: Image):
     ax.imshow(img, interpolation='nearest', aspect='equal')
     ax.set_xticks([], minor=[])
     ax.set_yticks([], minor=[])
+    
+def show_transform_examples(transform, img, n_examples=4):
+    batched_img = img.repeat(n_examples, 1, 1, 1)
+    grid = torchvision.utils.make_grid(transform(batched_img), nrow=2)
+    show(grid.unsqueeze(0))   
