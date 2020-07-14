@@ -1,5 +1,8 @@
 import IPython.display as display
+
 import matplotlib.pyplot as plt
+import torch.nn as nn
+
 from mlsec.imagenet_classes import IMAGENET_CLASSES
 
 def get_inference(logits):
