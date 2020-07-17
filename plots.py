@@ -173,7 +173,7 @@ def vis_probs(ax, probs, labels=None):
     ax.set_xticks(range(10))
     if labels:
         ax.set_xticklabels(labels)
-      ax.set_yticks([0.0, 0.25, 0.5, 0.75, 1.0])
+    ax.set_yticks([0.0, 0.25, 0.5, 0.75, 1.0])
     ax.set_ylabel('Confidence')
     ax.set_xlabel('Number')
     autolabel(ax, prob_bars)
