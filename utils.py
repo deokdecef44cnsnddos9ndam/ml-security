@@ -59,7 +59,10 @@ def show_on_axis(ax, img: Image, label=None):
     if label:
         ax.set_xlabel(label)
     
+def image_grid(images, nrow, figsize):
+    grid = torchvision.utils.make_grid(images, nrow=nrow)
+    show(grid.unsqueeze(0))   
+    
 def show_transform_examples(transform, img, n_examples=4):
     batched_img = img.repeat(n_examples, 1, 1, 1)
-    grid = torchvision.utils.make_grid(transform(batched_img), nrow=2)
-    show(grid.unsqueeze(0))   
+    image_grid(transform(batched_img), nrow=2)
