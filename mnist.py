@@ -1,8 +1,8 @@
-
-
 import torch
 import torch.nn as nn
 import torchvision
+
+import mlsec.utils as ut
 
 class Binarize(nn.Module):
 
@@ -64,3 +64,15 @@ def get_testing_data(device):
                              batch_size=128, 
                              shuffle=True)
   return test_loader
+
+def get_examples(training_data):
+  total = 0
+  examples = []
+  example_labels = []
+  for data, labels in training_data:
+    examples.append(data)
+    example_labels.append(labels)
+    total += len(data)
+    if total > 200:
+      break
+  return examples, example_labels
