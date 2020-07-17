@@ -31,9 +31,20 @@ def load_image_as_tensor(image_path: str) -> Image:
     img = img.unsqueeze(0)
     return img / 255.0
 
-def show(img: Image):
+def show(img: Image, figsize=None, label=None):
     """
     Displays the image in the notebook window
+    
+    Params
+    ------
+    img : Image
+    """
+    fig, ax = plt.subplots(figsize=figsize)
+    show_on_axis(ax, img, label)
+  
+def show_on_axis(ax, img: Image, label=None):
+    """
+    Displays the image on specific axis
     
     Params
     ------
@@ -42,10 +53,11 @@ def show(img: Image):
     img = img.detach()
     img = img[0].numpy()
     img = img.transpose(1, 2, 0)
-    fig, ax = plt.subplots(figsize=(10, 10))
     ax.imshow(img, interpolation='nearest', aspect='equal')
     ax.set_xticks([], minor=[])
     ax.set_yticks([], minor=[])
+    if label:
+        ax.set_xlabel(label)
     
 def show_transform_examples(transform, img, n_examples=4):
     batched_img = img.repeat(n_examples, 1, 1, 1)
