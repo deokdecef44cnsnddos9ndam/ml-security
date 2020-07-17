@@ -75,4 +75,7 @@ def get_examples(training_data):
     total += len(data)
     if total > 200:
       break
+      
+  examples = torch.cat(examples)[:200]
+  example_labels = torch.cat(example_labels)[:200]
   return examples, example_labels
