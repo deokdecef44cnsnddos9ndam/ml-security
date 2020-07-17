@@ -51,6 +51,7 @@ def get_training_data(device):
                              batch_size=128, 
                              shuffle=True)
   return train_loader
+
 def get_testing_data(device):
   test_loader = torch.utils.data.DataLoader(
   torchvision.datasets.MNIST('/files/', 
@@ -76,6 +77,6 @@ def get_examples(training_data):
     if total > 200:
       break
       
-  examples = torch.cat(examples)[:200]
-  example_labels = torch.cat(example_labels)[:200]
+  examples = torch.cat(examples)[:200].cpu()
+  example_labels = torch.cat(example_labels)[:200].cpu()
   return examples, example_labels
