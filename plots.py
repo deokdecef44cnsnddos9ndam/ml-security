@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import torch.nn as nn
 
 from mlsec.imagenet_classes import IMAGENET_CLASSES
+import mlsec.utils as ut
 
 def get_inference(logits):
     """
@@ -183,14 +184,14 @@ def example(img, probs, label_str=None):
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15,5))
     if label_str:
         label_str = f'Label: {label_str}'
-    show_on_axis(ax1, img.repeat(1, 3, 1, 1), label_str)
+    ut.show_on_axis(ax1, img.repeat(1, 3, 1, 1), label_str)
     vis_probs(ax2, probs)
     
 def progress(img, probs, loss_history, label_str=None):
     fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(30,5))
     if label_str:
         label_str = f'Label: {label_str}'
-    show_on_axis(ax1, img.repeat(1, 3, 1, 1), label_str)
+    ut.show_on_axis(ax1, img.repeat(1, 3, 1, 1), label_str)
     vis_probs(ax2, probs)
     ax3.set_title('Loss')
     ax3.set_ylabel('Loss Value')
