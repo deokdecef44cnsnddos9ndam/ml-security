@@ -193,7 +193,7 @@ def progress(img, model, loss_history, label_str=None):
     fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(30,5))
     if label_str:
         label_str = f'Label: {label_str}'
-    ut.show_on_axis(ax1, img.repeat(1, 3, 1, 1), label_str)
+    ut.show_on_axis(ax1, img.repeat(1, 3, 1, 1).cpu(), label_str)
     vis_probs(ax2, probs)
     ax3.set_title('Loss')
     ax3.set_ylabel('Loss Value')
