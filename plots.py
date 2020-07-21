@@ -27,14 +27,13 @@ def evaluate(model, transform, base_img, desired_class, threshold=0.5):
    
     successes = 0
     failures = 0
-
-    batched_img = base_img.repeat(10, 1, 1, 1)
     score_history = []
     
     for i in range(5):
-        logits = model(transform(batched_img))
+        with torch.no_grad():
+            logits = model(transform(batched_img, 10))
         for l in logits:
-            score = get_score(l, desired_class)
+            score = ut.get_score(l, desired_class)
             if score > threshold:
                 successes += 1
             else:
