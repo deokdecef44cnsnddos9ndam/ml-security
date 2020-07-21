@@ -139,7 +139,7 @@ def progress(img, model, loss_history, label_str=None):
         display.display(plt.gcf())
     else:
         #imagenet
-         plt.close()
+        plt.close()
         fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(30,5))
         if label_str:
             label_str = f'Label: {label_str}'
