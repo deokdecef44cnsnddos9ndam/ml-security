@@ -122,7 +122,7 @@ def print_inference(logits: Logits):
     for name, prob in results:
         print(f'{name}: {prob}')
         
-def get_score(logits: Logits, class_name: str) -> float:
+def get_score(probs, class_name: str) -> float:
     """
     Returns the probability of a given class
     
@@ -137,7 +137,6 @@ def get_score(logits: Logits, class_name: str) -> float:
     float
         class probability
     """
-    probs = nn.Softmax(dim=0)(logits)
     ind = get_class_index(class_name)
     return probs[ind].item()
 
