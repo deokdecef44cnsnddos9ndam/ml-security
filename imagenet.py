@@ -137,6 +137,11 @@ def make_label(class_name, device):
     labels = class_index * torch.ones((1)).long()
     return labels.to(device)
 
+def make_labels(class_name, batch_size, device):
+    class_index = get_class_index(class_name)
+    labels = class_index * torch.ones((batch_size)).long()
+    return labels.to(device)
+
 def get_transform():
     
     transform = nn.Sequential(
