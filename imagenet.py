@@ -4,7 +4,6 @@ import kornia.geometry as geo
 import torch
 import torch.nn as nn
 
-
 def build_model(model_name, device):
     return ImagenetModel(model_name).to(device)
 
@@ -36,8 +35,10 @@ class ImagenetModel(nn.Module):
             pass
         elif self.model.input_space == "BGR":
             self.transform = nn.Sequential(transform, color.RgbToBgr())
+        
+        self.softmax = nn.Softmax(dim=1)
 
-    def forward(self, images: Images) -> Logits:
+    def forward(self, images):
         """
         Model's forward pass.
         
@@ -53,4 +54,4 @@ class ImagenetModel(nn.Module):
         images = images.to(self.device)
         transformed_images = self.transform(images)
         logits = self.model(transformed_images)
-        return logits
+        return self.softmax(logits)
