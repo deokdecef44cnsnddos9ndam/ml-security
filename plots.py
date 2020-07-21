@@ -1,6 +1,7 @@
 import IPython.display as display
 
 import matplotlib.pyplot as plt
+import torch
 import torch.nn as nn
 
 import mlsec.utils as ut
