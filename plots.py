@@ -32,7 +32,7 @@ def evaluate(model, transform, base_img, desired_class, threshold=0.5):
     
     for i in range(5):
         with torch.no_grad():
-            logits = model(transform(batched_img, 10))
+            logits = model(transform(base_img, 10))
         for l in logits:
             score = ut.get_score(l, desired_class)
             if score > threshold:
