@@ -87,7 +87,7 @@ def vis_probs(ax, probs, labels=None):
     else:
         #imagenet
         probs = [float(p.item()) for p in probs[0]]
-        labels = list(IMAGENET_CLASSES.values())
+        labels = list(map(lambda l: l[:25], IMAGENET_CLASSES.values()))
         data = zip(probs, labels)
         data = sorted(data, key=lambda x: x[0], reverse=True)
         probs, labels = zip(*data[:10])
@@ -99,7 +99,7 @@ def vis_probs(ax, probs, labels=None):
         ax.set_ylim(0.0, 1.0)
         ax.set_xticks(range(10))
         if labels:
-            ax.set_xticklabels(labels)
+            ax.set_xticklabels(labels, rotation=45)
         ax.set_yticks([0.0, 0.25, 0.5, 0.75, 1.0])
         ax.set_ylabel('Confidence')
         ax.set_xlabel('Number')
