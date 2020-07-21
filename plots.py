@@ -105,7 +105,34 @@ def vis_probs(ax, probs, labels=None):
         ax.set_ylabel('Confidence')
         ax.set_xlabel('Class Name')
         autolabel(ax, prob_bars)
- 
+        
+ def vis_labels(ax, class_id, labels=None):
+    if isinstance(class_id, int):
+        #mnist
+        probs = torch.zeros((1, 10))
+        probs[0, class_id] = 1.0
+        vis_probs(ax, probs, labels=labels)
+    else:
+        #imagenet
+        probs = [float(p.item()) for p in probs[0]]
+        labels = list(map(lambda l: l[:26], IMAGENET_CLASSES.values()))
+        data = zip(probs, labels)
+        data = sorted(data, key=lambda x: x[0], reverse=True)
+        probs, labels = zip(*data[:10])
+        probs = [round(p, 2) for p in probs]
+        classification_prob = list(map(lambda p: p if p >= 0.5 else 0.0, probs))
+        prob_bars = ax.bar(range(10), probs)
+        ax.set_title('Model Ouput', pad=20)
+        ax.bar(range(10), classification_prob, color='red')
+        ax.set_ylim(0.0, 1.0)
+        ax.set_xticks(range(10))
+        if labels:
+            ax.set_xticklabels(labels, rotation=45, ha='right')
+        ax.set_yticks([0.0, 0.25, 0.5, 0.75, 1.0])
+        ax.set_ylabel('Confidence')
+        ax.set_xlabel('Class Name')
+        autolabel(ax, prob_bars)
+        
 def example(img, probs, label_str=None):
     if probs.shape[-1] == 10:
         #mnist
