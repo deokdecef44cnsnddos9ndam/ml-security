@@ -138,7 +138,8 @@ def make_label(class_name, device):
     return labels.to(device)
 
 def get_transform():
-    return nn.Sequential(
+    
+    transform = nn.Sequential(
         ZeroPad2d(150),
         RandomAffine(
             degrees=(-20, 20), 
@@ -148,3 +149,8 @@ def get_transform():
         ColorJitter(0.15), # Random Lighting
     )
     
+    def transform_fn(image, batch_size):
+        image = image.repeat(batch_size, 1, 1, 1)
+        return transform(image)
+    
+    return transform_fn
