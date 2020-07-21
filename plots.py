@@ -199,6 +199,6 @@ def progress(img, model, loss_history, label_str=None):
     ax3.set_ylabel('Loss Value')
     ax3.set_xlabel('Iteration')
     ax3.plot(loss_history)
-    display.clear_output(wait=True)
-    display.display(plt.gcf())
+    #display.clear_output(wait=True)
+    #display.display(plt.gcf())
     
