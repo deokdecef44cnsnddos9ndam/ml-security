@@ -3,6 +3,8 @@ import kornia.color as color
 import kornia.geometry as geo
 import torch
 import torch.nn as nn
+from kornia.augmentation import ColorJitter, RandomAffine
+from torch.nn import ZeroPad2d
 
 from mlsec.imagenet_classes import IMAGENET_CLASSES
 import mlsec.utils as ut
@@ -134,3 +136,15 @@ def make_label(class_name, device):
     class_index = get_class_index(class_name)
     labels = class_index * torch.ones((1)).long()
     return labels.to(device)
+
+def get_transform():
+    return nn.Sequential(
+        ZeroPad2d(150),
+        RandomAffine(
+            degrees=(-20, 20), 
+            translate=(0.25, 0.25), 
+            scale=(1.1, 1.5)
+        ),
+        ColorJitter(0.15), # Random Lighting
+    )
+    
