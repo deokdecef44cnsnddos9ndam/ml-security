@@ -3,6 +3,7 @@ import IPython.display as display
 import matplotlib.pyplot as plt
 import torch.nn as nn
 
+import mlsec.utils as ut
 from mlsec.imagenet_classes import IMAGENET_CLASSES
 
 
