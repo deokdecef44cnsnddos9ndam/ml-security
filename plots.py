@@ -86,17 +86,18 @@ def vis_probs(ax, probs, labels=None):
         autolabel(ax, prob_bars)
     else:
         #imagenet
-        probs = [round(float(p.item()), 2) for p in probs[0]]
+        probs = [float(p.item()) for p in probs[0]]
         labels = list(IMAGENET_CLASSES.keys())
         data = zip(probs, labels)
         data = sorted(data, key=lambda x: x[0], reverse=True)
         probs, labels = zip(*data[:10])
+        probs = [round(p, 2) for p in probs[0]]
         classification_prob = list(map(lambda p: p if p >= 0.5 else 0.0, probs))
         prob_bars = ax.bar(range(10), probs)
         ax.set_title('Model Ouput', pad=20)
         ax.bar(range(10), classification_prob, color='red')
         ax.set_ylim(0.0, 1.0)
-        ax.set_xticks(range(10))
+        ax.set_xticks(labels)
         if labels:
             ax.set_xticklabels(labels)
         ax.set_yticks([0.0, 0.25, 0.5, 0.75, 1.0])
