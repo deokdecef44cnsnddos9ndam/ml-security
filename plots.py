@@ -165,6 +165,7 @@ def progress(img, model, loss_history, label):
         
         vis_probs(ax3, probs)
         vis_labels(ax4, label)
+        ax4.set_xlabel("")
         display.clear_output(wait=True)
         display.display(plt.gcf())
     else:
