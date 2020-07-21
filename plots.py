@@ -91,7 +91,7 @@ def vis_probs(ax, probs, labels=None):
         data = zip(probs, labels)
         data = sorted(data, key=lambda x: x[0], reverse=True)
         probs, labels = zip(*data[:10])
-        probs = [round(p, 2) for p in probs[0]]
+        probs = [round(p, 2) for p in probs]
         classification_prob = list(map(lambda p: p if p >= 0.5 else 0.0, probs))
         prob_bars = ax.bar(range(10), probs)
         ax.set_title('Model Ouput', pad=20)
