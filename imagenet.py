@@ -151,11 +151,10 @@ def get_transform():
             translate=(0.25, 0.25), 
             scale=(1.1, 1.5)
         ),
-        ColorJitter(0.15), # Random Lighting
     )
     
     def transform_fn(image, batch_size):
-        image = image.repeat(batch_size, 1, 1, 1)
-        return transform(image)
+        b_image = image.repeat(batch_size, 1, 1, 1)
+        return transform(b_image)
     
     return transform_fn
