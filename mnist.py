@@ -80,3 +80,6 @@ def get_examples(training_data):
   examples = torch.cat(examples)[:200].cpu()
   example_labels = torch.cat(example_labels)[:200].cpu()
   return examples, example_labels
+
+def make_label(num, device):
+  return (torch.ones((1)) * num).long().to(device)
