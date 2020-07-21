@@ -150,20 +150,21 @@ def example(img, probs, label_str=None):
         ut.show_on_axis(ax1, img, label_str)
         vis_probs(ax2, probs)
     
-def progress(img, model, loss_history, label_str=None):
+def progress(img, model, loss_history, label):
     probs = model(img).cpu()
     if probs.shape[-1] == 10:
         #mnist
         plt.close()
-        fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(30,5))
-        if label_str:
-            label_str = f'Label: {label_str}'
-        ut.show_on_axis(ax1, img.repeat(1, 3, 1, 1).cpu(), label_str)
-        vis_probs(ax2, probs)
-        ax3.set_title('Loss')
-        ax3.set_ylabel('Loss Value')
-        ax3.set_xlabel('Iteration')
-        ax3.plot(loss_history)
+        fig, (ax1, ax2, ax3, ax4) = plt.subplots(2, 2, figsize=(30,5))
+        ut.show_on_axis(ax1, img.repeat(1, 3, 1, 1).cpu())
+
+        ax2.set_title('Loss')
+        ax2.set_ylabel('Loss Value')
+        ax2.set_xlabel('Iteration')
+        ax2.plot(loss_history)
+        
+        vis_probs(ax3, probs)
+        vis_labels(ax4, label)
         display.clear_output(wait=True)
         display.display(plt.gcf())
     else:
