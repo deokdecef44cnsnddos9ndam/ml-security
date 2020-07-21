@@ -106,12 +106,13 @@ def vis_probs(ax, probs, labels=None):
         ax.set_xlabel('Class Name')
         autolabel(ax, prob_bars)
         
- def vis_labels(ax, class_id, labels=None):
+def vis_labels(ax, class_id, labels=None):
     if isinstance(class_id, int):
         #mnist
         probs = torch.zeros((1, 10))
         probs[0, class_id] = 1.0
         vis_probs(ax, probs, labels=labels)
+        ax.set_title('Desired Ouput', pad=20)
     else:
         #imagenet
         probs = [float(p.item()) for p in probs[0]]
