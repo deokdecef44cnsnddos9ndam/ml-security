@@ -102,7 +102,7 @@ def vis_probs(ax, probs, labels=None):
             ax.set_xticklabels(labels, rotation=45, ha='right')
         ax.set_yticks([0.0, 0.25, 0.5, 0.75, 1.0])
         ax.set_ylabel('Confidence')
-        ax.set_xlabel('Number')
+        ax.set_xlabel('Class Name')
         autolabel(ax, prob_bars)
  
 def example(img, probs, label_str=None):
