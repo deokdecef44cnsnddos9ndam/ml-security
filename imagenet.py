@@ -130,23 +130,7 @@ def get_score(logits, class_name):
     ind = get_class_index(class_name)
     return probs[ind].item()
 
-def make_labels(class_name: str, size: int) -> torch.LongTensor:    
-    """
-    Make a set of standard torch labels for a given class. For use with nn.CrossEntropyLoss
-    
-    Params
-    ------
-    class_name: str
-        name of class
-    size: int
-        number of labels
-    
-    Returns
-    -------
-    torch.LongTensor of shape (size,)
-        labels
-    """
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+def make_label(class_name, device):
     class_index = get_class_index(class_name)
-    labels = class_index * torch.ones((size)).long()
+    labels = class_index * torch.ones((1)).long()
     return labels.to(device)
