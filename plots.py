@@ -155,7 +155,7 @@ def progress(img, model, loss_history, label):
     if probs.shape[-1] == 10:
         #mnist
         plt.close()
-        fig, (ax1, ax2, ax3, ax4) = plt.subplots(2, 2, figsize=(30,5))
+        fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(15,15))
         ut.show_on_axis(ax1, img.repeat(1, 3, 1, 1).cpu())
 
         ax2.set_title('Loss')
