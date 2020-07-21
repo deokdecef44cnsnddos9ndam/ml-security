@@ -5,6 +5,9 @@ import torch
 import torch.nn as nn
 
 
+def build_model(model_name, device):
+    return ImagenetModel(model_name).to(device)
+
 class ImagenetModel(nn.Module):
     """
     Different ImageNet models will preprocess images a little differently. The main purpose of the wrapper
