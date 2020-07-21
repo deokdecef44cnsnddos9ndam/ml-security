@@ -97,7 +97,7 @@ def vis_probs(ax, probs, labels=None):
         ax.set_title('Model Ouput', pad=20)
         ax.bar(range(10), classification_prob, color='red')
         ax.set_ylim(0.0, 1.0)
-        ax.set_xticks(range(10)
+        ax.set_xticks(range(10))
         if labels:
             ax.set_xticklabels(labels)
         ax.set_yticks([0.0, 0.25, 0.5, 0.75, 1.0])
