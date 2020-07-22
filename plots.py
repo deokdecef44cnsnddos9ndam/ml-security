@@ -84,7 +84,7 @@ def vis_probs(ax, probs, label):
         ax.set_xlabel('Number')
         if label:
             last = ax.bar([label], 1.0, color='red', alpha=0.5)
-            ax.legend([last], 'Desired Ouput')
+            ax.legend([last], ['Desired Ouput'])
         autolabel(ax, prob_bars)
     else:
         #imagenet
