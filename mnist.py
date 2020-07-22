@@ -83,3 +83,22 @@ def get_examples(training_data):
 
 def make_label(num, device):
   return (torch.ones((1)) * num).long().to(device)
+
+def run_test(model, dataset):
+  correct = 0.0
+  total = 0.0
+
+  for data, labels in dataset:
+    # Get model outputs
+    outputs = model(data).cpu()
+    # Classify by whatever had the highest confidence
+    pred = torch.argmax(outputs, dim=1)
+    # Correct examples 
+    correct_preds = pred == labels
+    # Increment our counters
+    correct += torch.sum(correct_preds)
+    total += len(labels)
+
+  accuracy = (correct / total).item()
+  percent_correct = round(accuracy * 100, 2)
+  print(f'The model output the correct label {percent_correct}% of the time')
