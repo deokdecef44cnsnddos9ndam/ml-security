@@ -71,6 +71,9 @@ def autolabel(ax, rects):
 def vis_probs(ax, probs, label):
     if probs.shape[-1] == 10:
         #mnist
+        if label:
+            last = ax.bar([label], 1.0, color='red', alpha=0.5)
+            ax.legend([last], ['Desired Ouput'])
         probs = [round(float(p.item()), 2) for p in probs[0]]
         classification_prob = list(map(lambda p: p if p >= 0.5 else 0.0, probs))
         prob_bars = ax.bar(range(10), probs)
@@ -82,9 +85,7 @@ def vis_probs(ax, probs, label):
         ax.set_yticks([0.0, 0.25, 0.5, 0.75, 1.0])
         ax.set_ylabel('Confidence')
         ax.set_xlabel('Number')
-        if label:
-            last = ax.bar([label], 1.0, color='red', alpha=0.5)
-            ax.legend([last], ['Desired Ouput'])
+
         autolabel(ax, prob_bars)
     else:
         #imagenet
