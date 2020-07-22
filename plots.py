@@ -68,7 +68,7 @@ def autolabel(ax, rects):
                     textcoords="offset points",
                     ha='center', va='bottom')
 
-def vis_probs(ax, probs, labels=None):
+def vis_probs(ax, probs, label):
     if probs.shape[-1] == 10:
         #mnist
         probs = [round(float(p.item()), 2) for p in probs[0]]
@@ -79,11 +79,11 @@ def vis_probs(ax, probs, labels=None):
         ax.bar(range(10), classification_prob, color='red')
         ax.set_ylim(0.0, 1.0)
         ax.set_xticks(range(10))
-        if labels:
-            ax.set_xticklabels(labels)
         ax.set_yticks([0.0, 0.25, 0.5, 0.75, 1.0])
         ax.set_ylabel('Confidence')
         ax.set_xlabel('Number')
+        if label:
+            ax.bar([label], 1.0, color='red', alpha=0.5)
         autolabel(ax, prob_bars)
     else:
         #imagenet
@@ -195,8 +195,7 @@ def progress_no_inference(img, probs, loss_history, label):
         ax2.set_xlabel('Iteration')
         ax2.plot(loss_history)
         
-        vis_probs(ax3, probs)
-        vis_labels(ax4, label)
+        vis_probs(ax3, probs, label)
         ax4.set_xlabel("")
         display.clear_output(wait=True)
         display.display(plt.gcf())
