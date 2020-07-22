@@ -136,20 +136,16 @@ def vis_labels(ax, class_id, labels=None):
         ax.set_xlabel('Class Name')
         autolabel(ax, prob_bars)
         
-def example(img, probs, label_str=None):
+def example(img, probs, label):
     if probs.shape[-1] == 10:
         #mnist
         fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15,5))
-        if label_str:
-            label_str = f'Label: {label_str}'
         ut.show_on_axis(ax1, img.repeat(1, 3, 1, 1), label_str)
-        vis_probs(ax2, probs)
+        vis_probs(ax2, probs, label)
     else:
         #imagenet
         fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15,5))
-        if label_str:
-            label_str = f'Label: {label_str}'
-        ut.show_on_axis(ax1, img, label_str)
+        ut.show_on_axis(ax1, img, label)
         vis_probs(ax2, probs)
     
 def progress(img, model, loss_history, label):
