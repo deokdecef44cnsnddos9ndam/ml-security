@@ -96,7 +96,8 @@ def vis_probs(ax, probs, label=None):
         data = zip(probs, labels)
         data = sorted(data, key=lambda x: x[0], reverse=True)
         probs, labels = zip(*data[:10])
-        
+        labels = list(labels)
+        probs = list(probs)
         if label:
             if not (label in labels):
                 labels[-1] = label
