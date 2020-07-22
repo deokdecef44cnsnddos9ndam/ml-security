@@ -188,7 +188,7 @@ def progress_no_inference(img, probs, loss_history, label):
     if probs.shape[-1] == 10:
         #mnist
         plt.close()
-        fig, (ax1, ax2, ax3, ax4) = plt.subplots(1, 3, figsize=(30,5))
+        fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(30,5))
         ut.show_on_axis(ax1, img.repeat(1, 3, 1, 1).cpu())
 
         ax2.set_title('Loss')
