@@ -182,10 +182,9 @@ def progress_no_inference(img, probs, loss_history, label):
         #imagenet
         plt.close()
         fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(30,5))
-        if label_str:
-            label_str = f'Label: {label_str}'
-        ut.show_on_axis(ax1, img.cpu(), label_str)
-        vis_probs(ax2, probs)
+
+        ut.show_on_axis(ax1, img.cpu())
+        vis_probs(ax2, probs, label)
         ax3.set_title('Loss')
         ax3.set_ylabel('Loss Value')
         ax3.set_xlabel('Iteration')
