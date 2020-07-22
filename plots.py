@@ -183,7 +183,7 @@ def progress(img, model, loss_history, label):
         display.clear_output(wait=True)
         display.display(plt.gcf())
         
-def progress_no_inference(probs, loss_history, label):
+def progress_no_inference(img, probs, loss_history, label):
     if probs.shape[-1] == 10:
         #mnist
         plt.close()
