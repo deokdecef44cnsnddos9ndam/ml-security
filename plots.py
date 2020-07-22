@@ -150,36 +150,7 @@ def example(img, probs, label):
     
 def progress(img, model, loss_history, label):
     probs = model(img).cpu()
-    if probs.shape[-1] == 10:
-        #mnist
-        plt.close()
-        fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(15,15))
-        ut.show_on_axis(ax1, img.repeat(1, 3, 1, 1).cpu())
-
-        ax2.set_title('Loss')
-        ax2.set_ylabel('Loss Value')
-        ax2.set_xlabel('Iteration')
-        ax2.plot(loss_history)
-        
-        vis_probs(ax3, probs)
-        vis_labels(ax4, label)
-        ax4.set_xlabel("")
-        display.clear_output(wait=True)
-        display.display(plt.gcf())
-    else:
-        #imagenet
-        plt.close()
-        fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(30,5))
-        if label_str:
-            label_str = f'Label: {label_str}'
-        ut.show_on_axis(ax1, img.cpu(), label_str)
-        vis_probs(ax2, probs)
-        ax3.set_title('Loss')
-        ax3.set_ylabel('Loss Value')
-        ax3.set_xlabel('Iteration')
-        ax3.plot(loss_history)
-        display.clear_output(wait=True)
-        display.display(plt.gcf())
+    progress_no_inference(img, probs, loss_history, label)
         
 def progress_no_inference(img, probs, loss_history, label):
     if probs.shape[-1] == 10:
