@@ -140,13 +140,13 @@ def example(img, probs, label):
     if probs.shape[-1] == 10:
         #mnist
         fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15,5))
-        ut.show_on_axis(ax1, img.repeat(1, 3, 1, 1), label_str)
+        ut.show_on_axis(ax1, img.repeat(1, 3, 1, 1))
         vis_probs(ax2, probs, label)
     else:
         #imagenet
         fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15,5))
-        ut.show_on_axis(ax1, img, label)
-        vis_probs(ax2, probs)
+        ut.show_on_axis(ax1, img)
+        vis_probs(ax2, probs, label)
     
 def progress(img, model, loss_history, label):
     probs = model(img).cpu()
