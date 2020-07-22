@@ -94,6 +94,9 @@ def vis_probs(ax, probs, label=None):
         data = zip(probs, labels)
         data = sorted(data, key=lambda x: x[0], reverse=True)
         probs, labels = zip(*data[:10])
+        if label in labels:
+            last = ax.bar(labels.index(label), 1.0, color='red', alpha=0.5)
+            ax.legend([last], ['Desired'])
         probs = [round(p, 2) for p in probs]
         classification_prob = list(map(lambda p: p if p >= 0.5 else 0.0, probs))
         prob_bars = ax.bar(range(10), probs)
