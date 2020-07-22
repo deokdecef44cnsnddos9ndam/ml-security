@@ -68,7 +68,7 @@ def autolabel(ax, rects):
                     textcoords="offset points",
                     ha='center', va='bottom')
 
-def vis_probs(ax, probs, label):
+def vis_probs(ax, probs, label=None):
     if probs.shape[-1] == 10:
         #mnist
         if label:
@@ -136,7 +136,7 @@ def vis_labels(ax, class_id, labels=None):
         ax.set_xlabel('Class Name')
         autolabel(ax, prob_bars)
         
-def example(img, probs, label):
+def example(img, probs, label=None):
     if probs.shape[-1] == 10:
         #mnist
         fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15,5))
