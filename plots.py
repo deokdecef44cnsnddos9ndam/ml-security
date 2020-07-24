@@ -170,7 +170,7 @@ def example_label(img, probs, label=None):
     ax2.bar(range(10), probs, color='red')
     ax2.set_ylim(0.0, 1.0)
     ax2.set_xticks(range(10))
-    ax2.set_ytickslabels([])
+    ax2.set_yticklabels([])
     ax2.set_xlabel('Number')
     
 def progress(img, model, loss_history, label):
