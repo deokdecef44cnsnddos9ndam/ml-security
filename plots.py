@@ -72,7 +72,7 @@ def vis_probs(ax, probs, label=None):
     if probs.shape[-1] == 10:
         #mnist
         if label:
-            last = ax.bar([label], 1.0, color='red', alpha=0.5)
+            last = ax.bar([label], 1.0, color='red', alpha=0.25)
             ax.legend([last], ['Desired'], loc=1)
         probs = [round(float(p.item()), 2) for p in probs[0]]
         classification_prob = list(map(lambda p: p if p >= 0.5 else 0.0, probs))
@@ -102,7 +102,7 @@ def vis_probs(ax, probs, label=None):
             if not (label in labels):
                 labels[-1] = label
                 probs[-1] = label_score
-            last = ax.bar(labels.index(label), 1.0, color='red', alpha=0.5)
+            last = ax.bar(labels.index(label), 1.0, color='red', alpha=0.25)
             ax.legend([last], ['Desired'], loc=1)
             
         probs = [round(p, 2) for p in probs]
