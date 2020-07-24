@@ -102,7 +102,7 @@ def vis_probs(ax, probs, label=None):
             if not (label in labels):
                 labels[-1] = label
                 probs[-1] = label_score
-            last = ax.bar(labels.index(label), 1.0, color='red', alpha=0.25)
+            last = ax.bar(labels.index(label), 1.0, color='red', alpha=0.25, hatch='//')
             ax.legend([last], ['Desired'], loc=1)
             
         probs = [round(p, 2) for p in probs]
@@ -163,7 +163,7 @@ def example_label(img, probs, label=None):
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15,5))
     ut.show_on_axis(ax1, img.repeat(1, 3, 1, 1))
     if label is not None:
-        last = ax2.bar([label], 1.0, color='red', alpha=0.25)
+        last = ax2.bar([label], 1.0, color='red', alpha=0.25, hatch='//')
         ax2.legend([last], ['Desired'], loc=1)
     probs = [round(float(p.item()), 2) for p in probs[0]]
  
