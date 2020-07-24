@@ -71,7 +71,7 @@ def autolabel(ax, rects):
 def vis_probs(ax, probs, label=None):
     if probs.shape[-1] == 10:
         #mnist
-        if label:
+        if label is not None:
             last = ax.bar([label], 1.0, color='red', alpha=0.25)
             ax.legend([last], ['Desired'], loc=1)
         probs = [round(float(p.item()), 2) for p in probs[0]]
@@ -91,14 +91,14 @@ def vis_probs(ax, probs, label=None):
         #imagenet
         probs = [float(p.item()) for p in probs[0]]
         labels = list(map(lambda l: l[:26], IMAGENET_CLASSES.values()))
-        if label:
+        if label is not None:
             label_score = probs[labels.index(label)]
         data = zip(probs, labels)
         data = sorted(data, key=lambda x: x[0], reverse=True)
         probs, labels = zip(*data[:10])
         labels = list(labels)
         probs = list(probs)
-        if label:
+        if label is not None:
             if not (label in labels):
                 labels[-1] = label
                 probs[-1] = label_score
@@ -162,7 +162,7 @@ def example(img, probs, label=None):
 def example_label(img, probs, label=None):
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15,5))
     ut.show_on_axis(ax1, img.repeat(1, 3, 1, 1))
-    if label:
+    if label is not None:
         last = ax2.bar([label], 1.0, color='red', alpha=0.25)
         ax2.legend([last], ['Desired'], loc=1)
     probs = [round(float(p.item()), 2) for p in probs[0]]
