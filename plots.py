@@ -163,15 +163,15 @@ def example_label(img, probs, label=None):
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15,5))
     ut.show_on_axis(ax1, img.repeat(1, 3, 1, 1))
     if label:
-        last = ax.bar([label], 1.0, color='red', alpha=0.5)
-        ax.legend([last], ['Desired'], loc=1)
+        last = ax2.bar([label], 1.0, color='red', alpha=0.5)
+        ax2.legend([last], ['Desired'], loc=1)
     probs = [round(float(p.item()), 2) for p in probs[0]]
  
-    ax.bar(range(10), probs, color='red')
-    ax.set_ylim(0.0, 1.0)
-    ax.set_xticks(range(10))
-    ax.set_ytickslabel([])
-    ax.set_xlabel('Number')
+    ax2.bar(range(10), probs, color='red')
+    ax2.set_ylim(0.0, 1.0)
+    ax2.set_xticks(range(10))
+    ax2.set_ytickslabel([])
+    ax2.set_xlabel('Number')
     
 def progress(img, model, loss_history, label):
     probs = model(img).cpu()
