@@ -1,5 +1,6 @@
 import pretrainedmodels
 import kornia.color as color
+import kornia.enhance as enhance
 import kornia.geometry as geo
 import torch
 import torch.nn as nn
@@ -33,7 +34,7 @@ class ImagenetModel(nn.Module):
         # Explicitly defining the transformation w/ differentiable transforms from kornia
         self.transform = nn.Sequential(
             geo.Resize(self.model.input_size[-2:]),
-            color.Normalize(torch.tensor(self.model.mean), torch.tensor(self.model.std)),
+            enhance.Normalize(torch.tensor(self.model.mean), torch.tensor(self.model.std)),
         )
 
         if self.model.input_space == "RGB":
